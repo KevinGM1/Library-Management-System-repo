@@ -21,7 +21,7 @@ one-to-many relationship between Accounts and Loans  (an account can have multip
 Features the API should be able to process
 1) register new accounts
 2) remove account
-3) list all accounts
+3) list all outstanding loans from a particular account
 4) add book
 5) remove book
 6) search book by title/author/isbn

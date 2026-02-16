@@ -1,0 +1,22 @@
+package com.kevinguevara.library_management.repository;
+
+import com.kevinguevara.library_management.model.Book;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface BookRepository extends JpaRepository<Book, Long>{
+    @Query("FROM Book WHERE title = :title")
+    Book findByTitle(@Param("title") String title);
+
+    @Query("FROM Book WHERE author = :author")
+    Book findByAuthor(@Param("author") String author);
+
+    @Query("FROM Book WHERE isbn = :isbn")
+    Book findByIsbn(@Param("isbn") String isbn);
+    
+}
+
+    
+
