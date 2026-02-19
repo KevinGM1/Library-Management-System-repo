@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface LoanService {
 
-    public void createLoan();
+    Loan createLoan(Long bookId, Long accountId);
 
-    public void returnBook();
+    Loan returnBook(Long loanId);
 
-    public void renewBook();
+    void renewBook(Long loanId);
 
-    public List<Loan> getAllLoans();
+    List<Loan> getAllLoans();
     
-    public List<Loan> getLoansFromAccount(Long accountId);
+    List<Loan> getLoansFromAccount(Long accountId);
 }

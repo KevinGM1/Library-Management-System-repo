@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface BookService {
 
-    public void createBook();
+    public Book addBook(Book book);
 
-    public void deleteBook();
+    public void deleteBook(Long bookId);
 
-    public Book searchBookByTitle(String title);
+    public List<Book> searchBookByTitle(String title);
 
-    public Book searchBookByAuthor(String author);
+    public List<Book> searchBookByAuthor(String author);
 
     public Book searchBookByIsbn(String isbn);
 
