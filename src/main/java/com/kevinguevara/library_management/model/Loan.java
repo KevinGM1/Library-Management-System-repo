@@ -22,12 +22,12 @@ public class Loan{
     private Long loanId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "bookId", nullable = false)
-    private Long bookId;
+    @JoinColumn(name = "book", nullable = false)
+    private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "accountId", nullable = false)
-    private Long accountId;
+    @JoinColumn(name = "account", nullable = false)
+    private Account account;
 
     @Column(name = "checkoutDate", nullable = false)
     private LocalDate checkoutDate;

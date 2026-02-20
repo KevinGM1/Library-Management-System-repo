@@ -12,18 +12,18 @@ public class LoanMapper {
         if(requestDTO == null)
             return null;
         return Loan.builder()
-            .bookId(requestDTO.getBookId())
-            .accountId(requestDTO.getAccountId())
+            .book(requestDTO.getBook())
+            .account(requestDTO.getAccount())
             .build();
     }
 
-    public LoanResponseDTO toLoanResponseDTO(Loan loan){
+    public LoanResponseDTO toResponseDTO(Loan loan){
         if(loan == null)
             return null;
         return LoanResponseDTO.builder()
             .loanId(loan.getLoanId())
-            .bookId(loan.getBookId())
-            .accountId(loan.getAccountId())
+            .book(loan.getBook())
+            .account(loan.getAccount())
             .checkoutDate(loan.getCheckoutDate())
             .dueDate(loan.getDueDate())
             .returnDate(loan.getReturnDate())

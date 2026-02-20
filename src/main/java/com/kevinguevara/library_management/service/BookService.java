@@ -1,20 +1,22 @@
 package com.kevinguevara.library_management.service;
 
-import com.kevinguevara.library_management.model.Book;
+//import com.kevinguevara.library_management.model.Book;
+import com.kevinguevara.library_management.dto.book.BookRequestDTO;
+import com.kevinguevara.library_management.dto.book.BookResponseDTO;
 
 import java.util.List;
 
 public interface BookService {
 
-    public Book addBook(Book book);
+    BookResponseDTO addBook(BookRequestDTO request);
 
-    public void deleteBook(Long bookId);
+    void deleteBook(Long bookId);
 
-    public List<Book> searchBookByTitle(String title);
+    List<BookResponseDTO> searchBookByTitle(String title);
 
-    public List<Book> searchBookByAuthor(String author);
+    List<BookResponseDTO> searchBookByAuthor(String author);
 
-    public Book searchBookByIsbn(String isbn);
+    BookResponseDTO searchBookByIsbn(String isbn);
 
-    public List<Book> getAllBooks();
+    List<BookResponseDTO> getAllBooks();
 }

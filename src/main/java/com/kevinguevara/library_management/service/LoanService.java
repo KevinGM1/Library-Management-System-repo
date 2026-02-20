@@ -1,18 +1,20 @@
 package com.kevinguevara.library_management.service;
 
+import com.kevinguevara.library_management.dto.loan.LoanRequestDTO;
+import com.kevinguevara.library_management.dto.loan.LoanResponseDTO;
 import com.kevinguevara.library_management.model.Loan;
 
 import java.util.List;
 
 public interface LoanService {
 
-    Loan createLoan(Long bookId, Long accountId);
+    LoanResponseDTO createLoan(LoanRequestDTO request);
 
-    Loan returnBook(Long loanId);
+    LoanResponseDTO returnBook(Long loanId);
 
     void renewBook(Long loanId);
 
-    List<Loan> getAllLoans();
+    List<LoanResponseDTO> getAllLoans();
     
-    List<Loan> getLoansFromAccount(Long accountId);
+    List<LoanResponseDTO> getLoansFromAccount(Long accountId);
 }
