@@ -4,7 +4,7 @@ import com.kevinguevara.library_management.dto.loan.LoanRequestDTO;
 import com.kevinguevara.library_management.dto.loan.LoanResponseDTO;
 import com.kevinguevara.library_management.mapper.LoanMapper;
 import com.kevinguevara.library_management.model.Book;
-import com.kevinguevara.library_management.model.Account;
+//import com.kevinguevara.library_management.model.Account;
 import com.kevinguevara.library_management.model.Loan;
 import com.kevinguevara.library_management.model.enums.LoanStatus;
 import com.kevinguevara.library_management.repository.BookRepository;
@@ -99,7 +99,7 @@ public class LoanServiceImpl implements LoanService {
         return loanMapper.toResponseDTO(returnedLoan);
     }
     @Override
-    public void renewBook(Long loanId){
+    public LoanResponseDTO renewBook(Long loanId){
         /*Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Loan not found"));
         if(loan.getReturnDate() != null)
             throw new IllegalStateException("Loan already returned");
@@ -120,7 +120,9 @@ public class LoanServiceImpl implements LoanService {
             throw new RuntimeException("Cannot renew book if no copies available");
 
         loan.setDueDate(loan.getDueDate().plusDays(14));
-        loanRepository.save(loan);
+        //loanRepository.save(loan);
+        Loan update = loanRepository.save(loan);
+        return loanMapper.toResponseDTO(update);
     }
      
     @Override
