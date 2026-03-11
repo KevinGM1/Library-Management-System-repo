@@ -8,23 +8,34 @@ import org.springframework.stereotype.Component;
 public class AccountMapper {
 
     public Account toEntity(AccountRequestDTO requestDTO){
-        if(requestDTO == null)
+        /*if(requestDTO == null)
             return null;
 
         return Account.builder()
             .name(requestDTO.getName())
             .email(requestDTO.getEmail())
-            .build();
+            .build(); */
+        Account account = new Account();
+
+        account.setName(requestDTO.getName());
+        account.setEmail(requestDTO.getEmail());
+        return account;
     }
 
     public AccountResponseDTO toResponseDTO(Account account){
-        if(account == null)
+        /*if(account == null)
             return null;
         return AccountResponseDTO.builder()
             .accountId(account.getAccountId())
             .name(account.getName())
             .email(account.getEmail())
             .build();
+            */
+        return new AccountResponseDTO(
+            account.getAccountId(),
+            account.getName(),
+            account.getEmail()
+        );
     }
     
 }

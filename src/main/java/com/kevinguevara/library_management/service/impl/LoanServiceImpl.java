@@ -3,6 +3,7 @@ package com.kevinguevara.library_management.service.impl;
 import com.kevinguevara.library_management.dto.loan.LoanRequestDTO;
 import com.kevinguevara.library_management.dto.loan.LoanResponseDTO;
 import com.kevinguevara.library_management.mapper.LoanMapper;
+import com.kevinguevara.library_management.model.Account;
 import com.kevinguevara.library_management.model.Book;
 //import com.kevinguevara.library_management.model.Account;
 import com.kevinguevara.library_management.model.Loan;
@@ -50,19 +51,29 @@ public class LoanServiceImpl implements LoanService {
 
         return loanRepository.save(loan); */
 
-        Book book = bookRepository.findById(request.getBook().getBookId()).orElseThrow(
+        // Book book = bookRepository.findById(request.getBook().getBookId()).orElseThrow(
+        //    ()-> new RuntimeException("Book not found"));
+        Book book = bookRepository.findById(request.getBookId()).orElseThrow(
             ()-> new RuntimeException("Book not found"));
-        accountRepository.findById(request.getAccount().getAccountId()).orElseThrow(
+        /*accountRepository.findById(request.getAccount().getAccountId()).orElseThrow(
+            () -> new RuntimeException("Account not found")); */
+        Account account = accountRepository.findById(request.getAccountId()).orElseThrow(
             () -> new RuntimeException("Account not found"));
         if(book.getAvailableCopies() <= 0){
             throw new RuntimeException("No copies available");
         }
-        Loan loan = Loan.builder()
+        /*Loan loan = Loan.builder()
             .book(request.getBook())
             .account(request.getAccount())
             .checkoutDate(LocalDate.now())
             .dueDate(LocalDate.now().plusDays(14))
-            .build();
+            .build(); */
+        Loan loan = new Loan();
+        loan.setBook(book);
+        loan.setAccount(account);
+        loan.setCheckoutDate(LocalDate.now());
+        loan.setDueDate(LocalDate.now().plusDays(14));
+
         
         book.setAvailableCopies(book.getAvailableCopies() - 1);
         bookRepository.save(book);

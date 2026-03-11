@@ -1,12 +1,15 @@
 package com.kevinguevara.library_management.dto.account;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
-@Builder
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountResponseDTO {
-    Long accountId;
-    String name;
-    String email;
+    private Long accountId;
+    private String name;
+    private String email;
 }

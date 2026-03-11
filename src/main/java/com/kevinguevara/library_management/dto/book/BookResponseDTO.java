@@ -1,15 +1,19 @@
 package com.kevinguevara.library_management.dto.book;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
-@Builder
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookResponseDTO {
-    Long bookId;
-    String title;
-    String author;
-    String isbn;
-    int totalCopies;
-    int availableCopies;
+    private Long bookId;
+    private String title;
+    private String author;
+    private String isbn;
+    private int totalCopies;
+    private int availableCopies;
 }

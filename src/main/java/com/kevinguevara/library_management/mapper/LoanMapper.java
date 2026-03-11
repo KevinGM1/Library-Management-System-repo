@@ -8,17 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoanMapper {
-    public Loan toEntity(LoanRequestDTO requestDTO){
-        if(requestDTO == null)
+    //public Loan toEntity(LoanRequestDTO requestDTO){
+        /*if(requestDTO == null)
             return null;
         return Loan.builder()
             .book(requestDTO.getBook())
             .account(requestDTO.getAccount())
-            .build();
-    }
+            .build(); */
+        //Loan loan = new Loan();
+
+
+    //}
 
     public LoanResponseDTO toResponseDTO(Loan loan){
-        if(loan == null)
+        /*if(loan == null)
             return null;
         return LoanResponseDTO.builder()
             .loanId(loan.getLoanId())
@@ -28,6 +31,16 @@ public class LoanMapper {
             .dueDate(loan.getDueDate())
             .returnDate(loan.getReturnDate())
             .loanStatus(loan.getStatus())
-            .build();
+            .build(); */
+        return new LoanResponseDTO(
+            loan.getLoanId(), 
+            loan.getBook().getBookId(),
+            loan.getAccount().getAccountId(),
+            loan.getCheckoutDate(),
+            loan.getDueDate(),
+            loan.getReturnDate(),
+            loan.getStatus()
+        );
+        
     }
 }

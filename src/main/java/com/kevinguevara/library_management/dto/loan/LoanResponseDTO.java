@@ -6,17 +6,19 @@ import com.kevinguevara.library_management.model.Account;
 import com.kevinguevara.library_management.model.Book;
 import com.kevinguevara.library_management.model.enums.LoanStatus;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
-@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoanResponseDTO {
-    Long loanId;
-    Book book;
-    Account account;
-    LocalDate checkoutDate;
-    LocalDate dueDate;
-    LocalDate returnDate;
-    LoanStatus loanStatus;
+    private Long loanId;
+    private Long bookId;
+    private Long accountId;
+    private LocalDate checkoutDate;
+    private LocalDate dueDate;
+    private LocalDate returnDate;
+    private LoanStatus loanStatus;
 }
