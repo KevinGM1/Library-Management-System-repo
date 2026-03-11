@@ -110,6 +110,7 @@ public class LoanServiceImpl implements LoanService {
         return loanMapper.toResponseDTO(returnedLoan);
     }
     @Override
+    @Transactional
     public LoanResponseDTO renewBook(Long loanId){
         /*Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Loan not found"));
         if(loan.getReturnDate() != null)
@@ -123,8 +124,9 @@ public class LoanServiceImpl implements LoanService {
         loanRepository.save(loan); */
         Loan loan = loanRepository.findById(loanId).orElseThrow(
             ()-> new RuntimeException("Loan not found"));
-        if(loan.getStatus() == LoanStatus.RETURNED)
-            throw new RuntimeException("Loan already returned");
+        updateOverdueBooks(loan);
+            if(loan.getStatus() != LoanStatus.ACTIVE)
+            throw new RuntimeException("Can only renew active loans");
 
         Book book = loan.getBook();
         if(book.getAvailableCopies() <= 0)
@@ -140,14 +142,25 @@ public class LoanServiceImpl implements LoanService {
     public List<LoanResponseDTO> getAllLoans(){
         //return loanRepository.findByReturnDateIsNull();
         List<Loan> allLoans = loanRepository.findAll();
+        allLoans.forEach(this::updateOverdueBooks);
         return allLoans.stream().map(loanMapper::toResponseDTO).toList();
     }
     
     @Override
     public List<LoanResponseDTO> getLoansFromAccount(Long accountId){
        // return loanRepository.findByAccountId(accountId);
+       Account account = accountRepository.findById(accountId).orElseThrow(
+            () -> new RuntimeException("Account not found"));
        List<Loan> allLoansFromAcc = loanRepository.findByAccountId(accountId);
-       return allLoansFromAcc.stream().map(loanMapper::toResponseDTO).toList();
-    } 
+       allLoansFromAcc.forEach(this::updateOverdueBooks);
+       return loanRepository.findByAccountId(account.getAccountId()).stream().map(loanMapper::toResponseDTO).toList();
+    }
+    
+    private void updateOverdueBooks(Loan loan){
+        if(loan.getStatus() == LoanStatus.ACTIVE && loan.getDueDate().isBefore(LocalDate.now())){
+            loan.setStatus(LoanStatus.OVERDUE);
+            loanRepository.save(loan);
+        }
+    }
     
 }
