@@ -1,7 +1,7 @@
 package com.kevinguevara.library_management.dto.loan;
 
-import com.kevinguevara.library_management.model.Account;
-import com.kevinguevara.library_management.model.Book;
+//import com.kevinguevara.library_management.model.Account;
+//import com.kevinguevara.library_management.model.Book;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

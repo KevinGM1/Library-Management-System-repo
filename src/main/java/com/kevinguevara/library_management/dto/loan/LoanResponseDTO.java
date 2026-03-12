@@ -2,8 +2,8 @@ package com.kevinguevara.library_management.dto.loan;
 
 import java.time.LocalDate;
 
-import com.kevinguevara.library_management.model.Account;
-import com.kevinguevara.library_management.model.Book;
+//import com.kevinguevara.library_management.model.Account;
+//import com.kevinguevara.library_management.model.Book;
 import com.kevinguevara.library_management.model.enums.LoanStatus;
 
 import lombok.AllArgsConstructor;

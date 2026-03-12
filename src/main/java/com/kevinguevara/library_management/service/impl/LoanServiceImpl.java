@@ -106,8 +106,8 @@ public class LoanServiceImpl implements LoanService {
         book.setAvailableCopies(book.getAvailableCopies() + 1);
         bookRepository.save(book);
 
-        Loan returnedLoan = loanRepository.save(loan);
-        return loanMapper.toResponseDTO(returnedLoan);
+        //Loan returnedLoan = loanRepository.save(loan);
+        return loanMapper.toResponseDTO(loan);
     }
     @Override
     @Transactional
@@ -134,8 +134,8 @@ public class LoanServiceImpl implements LoanService {
 
         loan.setDueDate(loan.getDueDate().plusDays(14));
         //loanRepository.save(loan);
-        Loan update = loanRepository.save(loan);
-        return loanMapper.toResponseDTO(update);
+        //Loan update = loanRepository.save(loan);
+        return loanMapper.toResponseDTO(loan);
     }
      
     @Override
