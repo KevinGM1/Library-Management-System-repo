@@ -1,6 +1,8 @@
 package com.kevinguevara.library_management.repository;
 
+import com.kevinguevara.library_management.model.Account;
 import com.kevinguevara.library_management.model.Loan;
+import com.kevinguevara.library_management.model.enums.LoanStatus;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ public interface LoanRepository extends JpaRepository<Loan, Long>{
     List<Loan> findByAccountId(Long accountId);
 
     List<Loan> findByReturnDateIsNull();
+
+    List<Loan> findByAccountAndLoanStatus(Account account, LoanStatus status);
 
     
 }

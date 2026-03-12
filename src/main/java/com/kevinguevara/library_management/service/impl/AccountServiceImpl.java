@@ -4,9 +4,15 @@ import com.kevinguevara.library_management.dto.account.AccountRequestDTO;
 import com.kevinguevara.library_management.dto.account.AccountResponseDTO;
 import com.kevinguevara.library_management.mapper.AccountMapper;
 import com.kevinguevara.library_management.model.Account;
+import com.kevinguevara.library_management.model.Loan;
+import com.kevinguevara.library_management.model.enums.LoanStatus;
 import com.kevinguevara.library_management.repository.AccountRepository;
+import com.kevinguevara.library_management.repository.LoanRepository;
 import com.kevinguevara.library_management.service.AccountService;
+
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 //import java.util.Optional;
@@ -16,6 +22,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
+    private final LoanRepository loanRepository;
 
     @Override
     public AccountResponseDTO createAccount(AccountRequestDTO request){
@@ -38,10 +45,18 @@ public class AccountServiceImpl implements AccountService {
             throw new IllegalArgumentException("Book not found with id: " + accountId);
         }
         accountRepository.deleteById(accountId); */
-        if(!accountRepository.existsById(accountId)){
+        /*if(!accountRepository.existsById(accountId)){
             throw new IllegalArgumentException("Account not found with id: " + accountId);
+        } 
+        accountRepository.deleteById(accountId); */
+        Account account = accountRepository.findById(accountId).orElseThrow(
+            () -> new RuntimeException("Account not found"));
+        List<Loan> activeLoans = loanRepository.findByAccountAndLoanStatus(account, LoanStatus.ACTIVE);
+
+        if(!activeLoans.isEmpty()){
+            throw new IllegalStateException("Account cannot be deleted with active loans");
         }
-        accountRepository.deleteById(accountId);
+        accountRepository.delete(account);
     }
 
 
